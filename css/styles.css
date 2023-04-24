@@ -1,0 +1,99 @@
+:root {
+  --background: rgb(68, 68, 68);
+  --background2: antiquewhite;
+  --element-bg: rgb(252, 212, 164);
+  --text-on-bg: antiquewhite;
+  --text-on-bg2: black;
+  --table-row-odd: var(--background2);
+  --table-row-even: var(--element-bg);
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: var(--background2);
+  color: var(--text-on-bg2);
+}
+body ul {
+  text-decoration: none;
+  list-style: none;
+}
+body ul li {
+  margin: 10px 0;
+}
+body ul li > * {
+  margin: 0 5px;
+}
+
+.navbar {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 5px 0;
+  background-color: var(--background);
+}
+.navbar ul {
+  display: flex;
+  justify-content: space-around;
+}
+.navbar ul li a {
+  padding: 1.9em;
+  color: var(--text-on-bg);
+  text-decoration: none;
+}
+
+.formular {
+  background-color: var(--element-bg);
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid var(--background);
+  border-radius: 10px;
+}
+.formular .submit {
+  background-color: var(--background2);
+  color: var(--text-on-bg2);
+  width: 150px;
+  align-self: center;
+  padding: 5px;
+  border-radius: 10px;
+  border-width: 0.5px;
+  cursor: pointer;
+}
+.formular .submit:hover {
+  background-color: var(--background);
+  color: var(--text-on-bg);
+}
+.formular ul {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.formular ul li {
+  display: inherit;
+  justify-content: center;
+}
+.formular ul li input {
+  padding: 2px 4px;
+  border-radius: 5px;
+}
+
+.tabulka {
+  background-color: var(--element-bg);
+  min-width: 600px;
+  max-width: 1000px;
+  width: 80%;
+  margin: 4em auto;
+  border-collapse: collapse;
+}
+.tabulka tr:nth-child(odd) {
+  background-color: var(--table-row-odd);
+}
+.tabulka tr:nth-child(even) {
+  background-color: var(--table-row-even);
+}
+.tabulka tr > * {
+  padding: 4px;
+  border: 1pt solid var(--background);
+}/*# sourceMappingURL=styles.css.map */
