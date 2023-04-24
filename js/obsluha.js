@@ -1,2 +1,2 @@
-import { vytvorDokument } from './Struktura.js';
-vytvorDokument();
+import { createDocument } from './Struktura.js';
+createDocument(document.getElementsByTagName('section')[0]);
