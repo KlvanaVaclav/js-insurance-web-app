@@ -48,11 +48,15 @@ body ul li > * {
   flex-direction: column;
   justify-content: center;
   width: var(--form-width);
-  height: 400px;
+  height: -moz-fit-content;
+  height: fit-content;
   margin: 20px auto;
-  padding: 40px 0px;
+  padding: 20px 0px;
   border: 2px solid var(--background);
   border-radius: 10px;
+}
+.formular h1 {
+  text-align: center;
 }
 .formular img {
   height: calc(var(--form-width) * 0.25);
