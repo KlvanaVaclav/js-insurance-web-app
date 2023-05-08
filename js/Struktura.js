@@ -49,15 +49,17 @@ function createTable(type) {
 
     tbody.prepend(tableName);
     tbody.appendChild(createHeader(labely));
-    loadLocalStorage(type);
+    loadLocalStorage(type, table);
     return table;
 }
 
-function createHeader(header) {
+function createHeader(headers) {
     let thead = document.createElement('tr');
+    let cellWidth = 100 / headers.length;
     thead.className = 'header'
-    header.forEach(col => {
+    headers.forEach(col => {
         let th = document.createElement('th');
+        th.style.width = `${cellWidth}%`;
         th.textContent = col;
         thead.appendChild(th);
     });
@@ -74,12 +76,12 @@ function createForm() {
 
     img.src = "./images/avatar.png";
 
-    formName.textContent = 'Přidat záznam';
+    formName.textContent = 'Přidat pojištěnce';
 
     form.className = 'formular';
 
     submit.type = 'submit';
-    submit.value = 'Přidat záznam';
+    submit.value = 'Přidat';
     submit.className = 'submit';
     submit.onclick = submitClicked;
 
@@ -89,8 +91,8 @@ function createForm() {
     }
 
     formNameSpan.appendChild(formName);
+    form.appendChild(formName)
     form.appendChild(img);
-    //form.appendChild(formNameSpan);
     form.appendChild(ul);
     form.appendChild(submit);
     return form;
@@ -115,11 +117,10 @@ function vytvorListItem(lbl) {
 }
 
 function submitClicked() {
-    let formLen = document.getElementsByClassName('formular')[0].childNodes[0].childNodes.length;
-    let listItems = document.getElementsByClassName('formular')[0].childNodes[0].childNodes;
+    let listItems = document.getElementsByClassName('formular')[0].childNodes[2].childNodes;
     let items = [];
 
-    for (let i = 0; i < formLen; i++) {
+    for (let i = 0; i < listItems.length; i++) {
         items.push(listItems[i].childNodes[0].value);
     }
 
@@ -133,7 +134,7 @@ function addPojistenec(items) {
     }
     let pojistenec = new Pojistenec(items[0], items[1], items[2], items[3]);
     if (addPojistenecLocalStorage(pojistenec))
-        addToTable(pojistenec);
+        window.location.replace('../index.html');
 }
 
 function addPojistenecLocalStorage(pojistenec) {
@@ -155,24 +156,24 @@ function addPojistenecLocalStorage(pojistenec) {
     return true;
 }
 
-function addToTable(pojistenec) {
-    let thead = document.getElementsByClassName('tabulka')[0].childNodes[0];
-    thead.innerHTML += pojistenec.toString();
+function addToTable(pojistenec, table) {
+    let tbody = table.getElementsByTagName('tbody')[0];
+    tbody.innerHTML += pojistenec.toString();
 }
 
-function loadLocalStorage(type) {
+function loadLocalStorage(type, table) {
     if (type == 'pojistenec') {
         if (localStorage.zaznamy == undefined) return;
         let zaznamy = JSON.parse(localStorage.zaznamy);
         for (let pojistenec of zaznamy) {
-            addToTable(new Pojistenec(pojistenec[labelyPojistencu[0]], pojistenec[labelyPojistencu[1]], pojistenec[labelyPojistencu[2]], pojistenec[labelyPojistencu[3]]));
+            addToTable(new Pojistenec(pojistenec[labelyPojistencu[0].toLowerCase()], pojistenec[labelyPojistencu[1]], pojistenec[labelyPojistencu[2]], pojistenec[labelyPojistencu[3]]), table);
         }
     }
     else {
         if (localStorage.pojisteni == undefined) return;
         let pojisteni = JSON.parse(localStorage.pojisteni);
         for (let p of pojisteni) {
-            addToTable(new Pojistenec(p[labelyPojisteni[0]], p[labelyPojisteni[1]], p[labelyPojisteni[2]]));
+            addToTable(new Pojistenec(p[labelyPojisteni[0]], p[labelyPojisteni[1]], p[labelyPojisteni[2]]), table);
         }
     }
 
